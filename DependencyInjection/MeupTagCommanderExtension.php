@@ -42,7 +42,7 @@ class MeupTagCommanderExtension extends Extension
 
 
         $datacollector = new Definition('Meup\Bundle\TagCommanderBundle\DataCollector\DataLayerCollector');
-        $datacollector->addTag('data_collector')
+        $datacollector->addTag('data_collector');
         $container->setDefinition(
             'meup_tagcommander.datacollector',
             $datacollector
