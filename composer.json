@@ -1,0 +1,32 @@
+{
+    "name":         "1001pharmacies/tagcommander-bundle",
+    "type":         "symfony-bundle",
+    "description":  "",
+    "license":      "MIT",
+    "keywords": [],
+    "authors": [
+        {
+            "name":  "methylbro",
+            "email": "thomas@1001pharmacies.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "symfony/symfony":           "2.3.*",
+        "phpunit/phpunit":           "4.*",
+        "squizlabs/php_codesniffer": "1.*",
+        "sebastian/phpcpd":          "2.*",
+        "phing/phing":               "~2.9"
+    },
+    "autoload": {
+        "psr-0": {
+            "Meup\\Bundle\\TagCommanderBundle": ""
+        }
+    },
+    "target-dir": "Meup/Bundle/TagCommanderBundle",
+    "config": {
+        "bin-dir": "bin"
+    }
+}
