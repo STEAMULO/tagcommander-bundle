@@ -33,11 +33,19 @@ class MeupTagCommanderExtension extends Extension
             $configs
         );
 
-        
 
-        $container->register(
+
+        $container->setDefinition(
             'meup_tagcommander.datalayer',
             new Definition('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag')
+        );
+
+
+        $datacollector = new Definition('Meup\Bundle\TagCommanderBundle\DataCollector\DataLayerCollector');
+        $datacollector->addTag('data_collector')
+        $container->setDefinition(
+            'meup_tagcommander.datacollector',
+            $datacollector
         );
 
 
@@ -49,6 +57,6 @@ class MeupTagCommanderExtension extends Extension
         );
         $twig_extension->addTag('twig.extension');
         
-        $container->register('meup_tagcommander.twig_extension', $twig_extension);
+        $container->setDefinition('meup_tagcommander.twig_extension', $twig_extension);
     }
 }
