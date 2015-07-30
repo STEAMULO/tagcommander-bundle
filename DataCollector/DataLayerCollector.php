@@ -23,15 +23,11 @@ class DataLayerCollector extends DataCollector
     }
 
     public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
-        $this->data = array(
-            'datalayer' => $this->datalayer,
-        );
-    }
+    {}
 
-    public function getMemory()
+    public function getDataLayer()
     {
-        return $this->data['datalayer'];
+        return $this->datalayer;
     }
 
     public function getName()
