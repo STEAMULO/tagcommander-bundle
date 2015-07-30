@@ -17,10 +17,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DataLayerCollector extends DataCollector
 {
+    public function __construct($datalayer)
+    {
+        $this->datalayer = $datalayer;
+    }
+
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = array(
-            'datalayer' => memory_get_peak_usage(true),
+            'datalayer' => $this->datalayer,
         );
     }
 
