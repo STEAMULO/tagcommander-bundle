@@ -42,13 +42,21 @@ class MeupTagCommanderExtension extends Extension
 
 
         $datacollector = new Definition('Meup\Bundle\TagCommanderBundle\DataCollector\DataLayerCollector');
-        $datacollector->addTag('data_collector');
+        $datacollector
+            ->addTag('data_collector',
+                array(
+                    'template' => 'MeupTagCommanderBundle:Collector:datalayer.html.twig',
+                    'id' => 'datalayer',
+                )
+            )
+        ;
         $container->setDefinition(
             'meup_tagcommander.datacollector',
             $datacollector
         );
 
 
+        /*
         $twig_extension = new Definition(
             'Meup\Bundle\TagCommanderBundle\Twig\TagCommanderExtension',
             array(
@@ -58,5 +66,6 @@ class MeupTagCommanderExtension extends Extension
         $twig_extension->addTag('twig.extension');
         
         $container->setDefinition('meup_tagcommander.twig_extension', $twig_extension);
+        */
     }
 }
