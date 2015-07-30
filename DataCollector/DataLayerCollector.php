@@ -12,6 +12,8 @@
 namespace Meup\Bundle\TagCommanderBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DataLayerCollector extends DataCollector
 {
