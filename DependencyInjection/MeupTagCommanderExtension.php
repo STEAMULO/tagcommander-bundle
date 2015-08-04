@@ -43,7 +43,6 @@ class MeupTagCommanderExtension extends Extension
             )
         );
 
-
         /* */
         $twig_extension = new Definition(
             'Meup\Bundle\TagCommanderBundle\Twig\TagCommanderExtension',

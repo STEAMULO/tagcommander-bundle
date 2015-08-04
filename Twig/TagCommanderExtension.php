@@ -12,6 +12,9 @@
 namespace Meup\Bundle\TagCommanderBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  *
@@ -29,8 +32,12 @@ class TagCommanderExtension extends \Twig_Extension
      */
     public function __construct(ParameterBagInterface $datalayer, $used_function)
     {
-        $this->datalayer = $datalayer;
+        $this->datalayer     = $datalayer;
         $this->used_function = $used_function;
+        $this->serializer    = new Serializer(
+            array(new ObjectNormalizer()),
+            array(new JsonEncoder())
+        );
     }
 
     /**
@@ -43,8 +50,23 @@ class TagCommanderExtension extends \Twig_Extension
         );
     }
 
-    public function tc_event($arg) {
-        return sprintf("%s('%s');", $this->used_function, $arg);
+    /**
+     *
+     */
+    public function tc_event($event_name, $values = array()) {
+        $datalayer = clone $this->datalayer;
+        return sprintf(
+            "%s('%s', %s);",
+            $this->used_function,
+            $event_name,
+            $this->serializer->serialize(
+                array_merge(
+                    $datalayer->all(), 
+                    $values
+                ),
+                'json'
+            )
+        );
     }
 
     /**
@@ -54,7 +76,6 @@ class TagCommanderExtension extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction('tc_event', array($this, 'tc_event')),
-            //new \Twig_SimpleFunction('tc_path',  array($this, '')),
         );
     }
 

@@ -40,8 +40,19 @@ class DataLayerCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = array(
-            'datalayer' => $this->datalayer->all(),
+            'values' => $this->datalayer->all(),
+            'events' => array(),
         );
+    }
+
+    public function getValues()
+    {
+        return $this->data['values'];
+    }
+
+    public function getEvents()
+    {
+        return $this->data['events'];
     }
 
     /**
