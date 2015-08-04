@@ -41,8 +41,8 @@ class TagCommanderExtension extends \Twig_Extension
         );
     }
 
-    public function tc_event() {
-        return 'toto';
+    public function tc_event($arg) {
+        return sprintf('tc_event_3("%s");', $arg);
     }
 
     /**
