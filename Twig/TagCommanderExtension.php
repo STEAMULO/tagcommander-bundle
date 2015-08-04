@@ -22,13 +22,15 @@ class TagCommanderExtension extends \Twig_Extension
      * @var ParameterBagInterface
      */
     protected $datalayer;
+    protected $used_function;
 
     /**
      *
      */
-    public function __construct(ParameterBagInterface $datalayer)
+    public function __construct(ParameterBagInterface $datalayer, $used_function)
     {
         $this->datalayer = $datalayer;
+        $this->used_function = $used_function;
     }
 
     /**
@@ -42,7 +44,7 @@ class TagCommanderExtension extends \Twig_Extension
     }
 
     public function tc_event($arg) {
-        return sprintf('tc_event_3("%s");', $arg);
+        return sprintf("%s('%s');", $this->used_function, $arg);
     }
 
     /**
