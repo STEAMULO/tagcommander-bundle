@@ -41,11 +41,20 @@ class TagCommanderExtension extends \Twig_Extension
         );
     }
 
+    public function tc_event() {
+        return 'toto';
+    }
+
     /**
      *
      */
     public function getFunctions()
-    {}
+    {
+        return array(
+            new \Twig_SimpleFunction('tc_event', array($this, 'tc_event')),
+            //new \Twig_SimpleFunction('tc_path',  array($this, '')),
+        );
+    }
 
     /**
      *

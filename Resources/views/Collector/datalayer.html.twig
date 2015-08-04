@@ -3,7 +3,7 @@
 {% block toolbar %}
     {% set icon %}
     <span class="icon"><img src="data:image/x-icon;base64,AAABAAEAEBAAAAAAAABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAD///8AagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygD///8A////AGoIygBqCMo5agjKz2oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIyv9qCMr/agjKyWoIyjZqCMoA////AP///wBqCMoAagjK22oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIyv9qCMrMagjKAP///wD///8AagjKAGoIyvBqCMr/agjK/2oIyv//////////////////////agjK/2oIyv9qCMr/agjK8GoIygD///8A////AGoIygBqCMrwagjK/2oIyv9qCMr/iDnV///////j0fX/iDnV/2oIyv9qCMr/agjK/2oIyvBqCMoA////AP///wBqCMoAagjK8GoIyv9qCMr/agjK/2oIyv//////3MXz/2oIyv9qCMr/agjK/2oIyv9qCMrwagjKAP///wD///8AagjKAGoIyvBqCMr/agjK/2oIyv9qCMr//////9zF8/9qCMr/agjK/2oIyv9qCMr/agjK8GoIygD///8A////AGoIygBqCMrwagjK/2oIyv9qCMr/agjK///////cxfP/agjK/2oIyv9qCMr/agjK/2oIyvBqCMoA////AP///wBqCMoAagjK8GoIyv9qCMr/agjK/2oIyv//////3MXz/2oIyv9qCMr/agjK/2oIyv9qCMrwagjKAP///wD///8AagjKAGoIyvBqCMr/agjK/2oIyv9qCMr//////9zF8/9qCMr/agjK/2oIyv9qCMr/agjK8GoIygD///8A////AGoIygBqCMrweB/P/+HO9P94H8//agjK///////cxfP/agjK/3gfz//hzvT/cRTM/2oIyvBqCMoA////AP///wBqCMoAagjK8Hwl0P//////fCXQ/2oIyv//////3MXz/2oIyv98JdD//////3MXzf9qCMrwagjKAP///wD///8AagjKAGoIyvB8JdD///////////////////////////////////////////9zF83/agjK8GoIygD///8A////AGoIygBqCMreagjK/2oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIytJqCMoA////AP///wBqCMoAagjKQmoIysNqCMr/agjK/2oIyv9qCMr/agjK/2oIyv9qCMr/agjK/2oIysNqCMo2agjKAP///wD///8AagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygBqCMoAagjKAGoIygD///8A//8AAOAHAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADAAwAAwAMAAMADAADgBwAA//8AAA==" alt=""/></span>
-    <span class="sf-toolbar-status">datalayer</span>
+    <span class="sf-toolbar-status">{{ collector.datalayer | lenght }} / 0</span>
     {% endset %}
 
     {% set text %}
@@ -37,9 +37,8 @@
 {% endblock %}
 
 {% block panel %}
-    {# Optional, for showing the most details. #}
-    <h2>TagCommander DataLayer</h2>
 
+    <h2>DataLayer</h2>
     <table>
         <thead>
             <tr>
@@ -51,10 +50,25 @@
             {% for key, value in collector.datalayer %}
             <tr>
                 <th>{{ key }}</th>
-                <td>{{ value }}</td>
+
+                <td>
+                {% if value is iterable %}
+                <table>
+                {% for subkey, subvalue in value %}
+                  <tr>
+                    <td>{{ subkey }}</td>
+                    <td>{{ subvalue }}</td>
+                  </tr>
+                {% endfor %}
+                </table>
+                {% else %}{{ value }}{% endif %}
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <h2>Containers</h2>
+
 
 {% endblock %}

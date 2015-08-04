@@ -14,22 +14,39 @@ namespace Meup\Bundle\TagCommanderBundle\DataCollector;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+/**
+ *
+ */
 class DataLayerCollector extends DataCollector
 {
-    public function __construct($datalayer)
+    /**
+     * @var ParameterBagInterface
+     */
+    protected $datalayer;
+
+    /**
+     * @param ParameterBagInterface $datalayer
+     */
+    public function __construct(ParameterBagInterface $datalayer)
     {
         $this->datalayer = $datalayer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
-    {}
-
-    public function getDataLayer()
     {
-        return $this->datalayer;
+        $this->data = array(
+            'datalayer' => $this->datalayer->all(),
+        );
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public function getName()
     {
         return 'datalayer';

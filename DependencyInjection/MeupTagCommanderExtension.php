@@ -28,19 +28,38 @@ class MeupTagCommanderExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        /* loading configuration */
         $config = $this->processConfiguration(
             new Configuration(),
             $configs
         );
 
 
-
+        /* setting up datalayer */
         $container->setDefinition(
             'meup_tagcommander.datalayer',
-            new Definition('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag')
+            new Definition(
+                'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag'
+            )
         );
 
 
+        /* */
+        $twig_extension = new Definition(
+            'Meup\Bundle\TagCommanderBundle\Twig\TagCommanderExtension',
+            array(
+                new Reference('meup_tagcommander.datalayer')
+            )
+        );
+        $twig_extension->addTag('twig.extension');
+        
+        $container->setDefinition(
+            'meup_tagcommander.twig_extension',
+            $twig_extension
+        );
+
+
+        /* setting up the datalayer collector for the toolbar */
         $datacollector = new Definition(
             'Meup\Bundle\TagCommanderBundle\DataCollector\DataLayerCollector',
             array(
@@ -51,7 +70,7 @@ class MeupTagCommanderExtension extends Extension
             ->addTag('data_collector',
                 array(
                     'template' => 'MeupTagCommanderBundle:Collector:datalayer.html.twig',
-                    'id' => 'datalayer',
+                    'id'       => 'datalayer',
                 )
             )
         ;
@@ -59,18 +78,5 @@ class MeupTagCommanderExtension extends Extension
             'meup_tagcommander.datacollector',
             $datacollector
         );
-
-
-        /*
-        $twig_extension = new Definition(
-            'Meup\Bundle\TagCommanderBundle\Twig\TagCommanderExtension',
-            array(
-                new Reference('meup_tagcommander.datalayer')
-            )
-        );
-        $twig_extension->addTag('twig.extension');
-        
-        $container->setDefinition('meup_tagcommander.twig_extension', $twig_extension);
-        */
     }
 }
