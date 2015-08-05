@@ -45,7 +45,7 @@ class MeupTagcommanderExtension extends Extension
 
         /* */
         $twig_extension = new Definition(
-            'Meup\Bundle\TagcommanderBundle\Twig\TagCommanderExtension',
+            'Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension',
             array(
                 new Reference('meup_tagcommander.datalayer'),
                 'tc_events_3'
