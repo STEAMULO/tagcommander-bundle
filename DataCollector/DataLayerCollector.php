@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle\DataCollector;
+namespace Meup\Bundle\TagcommanderBundle\DataCollector;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;

@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle\DependencyInjection;
+namespace Meup\Bundle\TagcommanderBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Definition;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class MeupTagCommanderExtension extends Extension
+class MeupTagcommanderExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -45,7 +45,7 @@ class MeupTagCommanderExtension extends Extension
 
         /* */
         $twig_extension = new Definition(
-            'Meup\Bundle\TagCommanderBundle\Twig\TagCommanderExtension',
+            'Meup\Bundle\TagcommanderBundle\Twig\TagCommanderExtension',
             array(
                 new Reference('meup_tagcommander.datalayer'),
                 'tc_events_3'
@@ -61,7 +61,7 @@ class MeupTagCommanderExtension extends Extension
 
         /* setting up the datalayer collector for the toolbar */
         $datacollector = new Definition(
-            'Meup\Bundle\TagCommanderBundle\DataCollector\DataLayerCollector',
+            'Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector',
             array(
                 new Reference('meup_tagcommander.datalayer')
             )
@@ -69,7 +69,7 @@ class MeupTagCommanderExtension extends Extension
         $datacollector
             ->addTag('data_collector',
                 array(
-                    'template' => 'MeupTagCommanderBundle:Collector:datalayer.html.twig',
+                    'template' => 'MeupTagcommanderBundle:Collector:datalayer.html.twig',
                     'id'       => 'datalayer',
                 )
             )

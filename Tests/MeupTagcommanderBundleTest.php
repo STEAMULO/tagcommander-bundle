@@ -9,19 +9,19 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle\Tests;
+namespace Meup\Bundle\TagcommanderBundle\Tests;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * 
  */
-class MeupTagCommanderBundleTest extends \PHPUnit_Framework_TestCase
+class MeupTagcommanderBundleTest extends \PHPUnit_Framework_TestCase
 {
     public function testBuild()
     {
         $bundle = $this
-            ->getMockBuilder('Meup\Bundle\TagCommanderBundle\MeupTagCommanderBundle')
+            ->getMockBuilder('Meup\Bundle\TagcommanderBundle\MeupTagcommanderBundle')
             ->disableOriginalConstructor()
             ->getMockForAbstractClass()
         ;

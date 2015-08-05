@@ -9,13 +9,13 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle;
+namespace Meup\Bundle\TagcommanderBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  *
  */
-class MeupTagCommanderBundle extends Bundle
+class MeupTagcommanderBundle extends Bundle
 {
 }

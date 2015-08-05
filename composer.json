@@ -22,10 +22,10 @@
     },
     "autoload": {
         "psr-0": {
-            "Meup\\Bundle\\TagCommanderBundle": ""
+            "Meup\\Bundle\\TagcommanderBundle": ""
         }
     },
-    "target-dir": "Meup/Bundle/TagCommanderBundle",
+    "target-dir": "Meup/Bundle/TagcommanderBundle",
     "config": {
         "bin-dir": "bin"
     }

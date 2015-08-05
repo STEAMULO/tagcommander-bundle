@@ -9,18 +9,18 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle\DependencyInjection;
+namespace Meup\Bundle\TagcommanderBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Meup\Bundle\TagCommanderBundle\DependencyInjection\MeupTagCommanderExtension;
+use Meup\Bundle\TagcommanderBundle\DependencyInjection\MeupTagcommanderExtension;
 
 /**
  *
  */
-class MeupTagCommanderExtensionTest extends \PHPUnit_Framework_TestCase
+class MeupTagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var MeupTagCommanderExtension
+     * @var MeupTagcommanderExtension
      */
     private $extension;
 
@@ -32,11 +32,11 @@ class MeupTagCommanderExtensionTest extends \PHPUnit_Framework_TestCase
     private $root;
 
     /**
-     * @return MeupTagCommanderExtension
+     * @return MeupTagcommanderExtension
      */
     protected function getExtension()
     {
-        return new MeupTagCommanderExtension();
+        return new MeupTagcommanderExtension();
     }
 
     /**

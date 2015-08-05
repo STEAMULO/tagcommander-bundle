@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagCommanderBundle\DependencyInjection;
+namespace Meup\Bundle\TagcommanderBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -31,9 +31,45 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('default')
-                    ->defaultValue("datalayer_%kernel.environment%")
+
+                ->scalarNode('default_event')
+                    ->defaultValue('default')
                 ->end()
+
+                ->arrayNode('datalayer')
+                    ->children()
+                        ->scalarNode('name')
+                            ->defaultValue('tc_vars')
+                        ->end()
+                        ->variableNode('default')
+                        ->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('containers')
+                    ->isRequired()
+                    ->requiresAtLeastOneElement()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('name')->end()
+                            ->scalarNode('script')->end()
+                            ->scalarNode('version')->end()
+                            ->scalarNode('alternative')->end()
+                        ->end()
+                    ->end()
+                ->end()
+
+                ->arrayNode('events')
+                    ->isRequired()
+                    ->requiresAtLeastOneElement()
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('name')->end()
+                            ->scalarNode('function')->end()
+                        ->end()
+                    ->end()
+                ->end()
+
             ->end()
         ;
 
