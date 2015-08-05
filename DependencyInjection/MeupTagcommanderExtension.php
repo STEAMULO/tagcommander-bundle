@@ -64,7 +64,7 @@ class MeupTagcommanderExtension extends Extension
             $twig_extension->addMethodCall('addContainer', array($tc_container));
         }
         foreach ($config['events'] as $tc_event) {
-            $twig_extension->addMethodCall('addEvent', array($tc_event));
+            $twig_extension->addMethodCall('addEvent', array($tc_event, $tc_event['name']==$config['default_event']));
         }
 
         $container->setDefinition(
