@@ -39,16 +39,21 @@ class MeupTagcommanderExtension extends Extension
         $container->setDefinition(
             'meup_tagcommander.datalayer',
             new Definition(
-                'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag'
+                'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag',
+                array(
+                    $config['datalayer']['default']
+                )
             )
         );
+        $container->setAlias('meup_tagcommander.datalayer', 'tc_datalayer');
 
         /* */
         $twig_extension = new Definition(
             'Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension',
             array(
                 new Reference('meup_tagcommander.datalayer'),
-                'tc_events_3'
+                'tc_events_3',
+                $config['datalayer']['name'] // name okf the datalayer
             )
         );
         $twig_extension->addTag('twig.extension');

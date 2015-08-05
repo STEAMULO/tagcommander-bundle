@@ -41,8 +41,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('name')
                             ->defaultValue('tc_vars')
                         ->end()
-                        ->variableNode('default')
-                        ->end()
+                        ->variableNode('default')->end()
                     ->end()
                 ->end()
 

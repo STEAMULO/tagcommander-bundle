@@ -34,6 +34,8 @@ meup_tagcommander:
         - { name: "other_events", function: "tc_events_2" }
 ```
 
+The `meup_tagcommander.datalayer.default` config node allows you to pre-fill your datalayer directly from your your config tree.
+
 Then update your pages to track events :
 
 ```html
@@ -55,4 +57,13 @@ Then update your pages to track events :
     {% endblock %}
   </body>
 </html>
+```
+
+Using `tc_datalayer` service
+
+```
+$datalayer = $container->get('tc_datalayer');
+$datalayer->set('foo', 'bar');
+
+var_dump($datalayer->all());
 ```

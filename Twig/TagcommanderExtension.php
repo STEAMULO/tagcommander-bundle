@@ -70,9 +70,6 @@ class TagcommanderExtension extends \Twig_Extension
         ;
     }
 
-    /**
-     *
-     */
     public function tc_datalayer($values = array())
     {
         return sprintf(
@@ -82,9 +79,6 @@ class TagcommanderExtension extends \Twig_Extension
         );
     }
 
-    /**
-     *
-     */
     public function tc_event($event_name, $values = array()) {
         return sprintf(
             "%s('%s', %s);",
@@ -94,13 +88,19 @@ class TagcommanderExtension extends \Twig_Extension
         );
     }
 
+    public function tc_container($container_name)
+    {
+        return sprintf('<script type="text/javascript" src="%s"></script>', $src);
+    }
+
     /**
      *
      */
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction($this->tc_vars, array($this, 'tc_datalayer')),
+            new \Twig_SimpleFunction($this->tc_vars, array($this, 'tc_vars')),
+            new \Twig_SimpleFunction('tc_container', array($this, 'tc_container')),
             new \Twig_SimpleFunction('tc_event',     array($this, 'tc_event')),
         );
     }
