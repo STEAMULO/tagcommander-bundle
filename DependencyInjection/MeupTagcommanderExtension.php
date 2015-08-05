@@ -36,14 +36,16 @@ class MeupTagcommanderExtension extends Extension
 
 
         /* setting up datalayer */
+        $datalayer = new Definition(
+            'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag',
+            array(
+                $config['datalayer']['default']
+            )
+        );
+        $datalayer->setPublic(false);
         $container->setDefinition(
             'meup_tagcommander.datalayer',
-            new Definition(
-                'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag',
-                array(
-                    $config['datalayer']['default']
-                )
-            )
+            $datalayer
         );
         $container->setAlias('meup_tagcommander.datalayer', 'tc_datalayer');
 
@@ -52,12 +54,19 @@ class MeupTagcommanderExtension extends Extension
             'Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension',
             array(
                 new Reference('meup_tagcommander.datalayer'),
-                'tc_events_3',
-                $config['datalayer']['name'] // name okf the datalayer
+                $config['datalayer']['name']
             )
         );
         $twig_extension->addTag('twig.extension');
-        
+        $twig_extension->setPublic(false);
+
+        foreach ($config['containers'] as $container) {
+            $twig_extension->addMethodCall('addContainer', $container);
+        }
+        foreach ($config['events'] as $events) {
+            $twig_extension->addMethodCall('addEvent', $event);
+        }
+
         $container->setDefinition(
             'meup_tagcommander.twig_extension',
             $twig_extension
@@ -79,6 +88,7 @@ class MeupTagcommanderExtension extends Extension
                 )
             )
         ;
+        $datacollector->setPublic(false);
         $container->setDefinition(
             'meup_tagcommander.datacollector',
             $datacollector
