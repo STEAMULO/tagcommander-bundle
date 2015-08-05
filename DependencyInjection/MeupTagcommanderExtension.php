@@ -47,7 +47,7 @@ class MeupTagcommanderExtension extends Extension
             'meup_tagcommander.datalayer',
             $datalayer
         );
-        $container->setAlias('meup_tagcommander.datalayer', 'tc_datalayer');
+        $container->setAlias('tc_datalayer', 'meup_tagcommander.datalayer');
 
         /* */
         $twig_extension = new Definition(
@@ -60,11 +60,11 @@ class MeupTagcommanderExtension extends Extension
         $twig_extension->addTag('twig.extension');
         $twig_extension->setPublic(false);
 
-        foreach ($config['containers'] as $container) {
-            $twig_extension->addMethodCall('addContainer', $container);
+        foreach ($config['containers'] as $tc_container) {
+            $twig_extension->addMethodCall('addContainer', array($tc_container));
         }
-        foreach ($config['events'] as $events) {
-            $twig_extension->addMethodCall('addEvent', $event);
+        foreach ($config['events'] as $tc_event) {
+            $twig_extension->addMethodCall('addEvent', array($tc_event));
         }
 
         $container->setDefinition(
