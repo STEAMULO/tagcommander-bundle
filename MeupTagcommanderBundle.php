@@ -13,7 +13,7 @@ namespace Meup\Bundle\TagcommanderBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Meup\Bundle\MeupTagcommander\DependencyInjection\CompilerPass\CollectorSubscriber;
+use Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass\CollectorSubscriber;
 
 /**
  *
