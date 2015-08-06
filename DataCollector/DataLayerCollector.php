@@ -48,7 +48,7 @@ class DataLayerCollector extends DataCollector
 
     public function collectEvent($tracker_name, $event_name, $values = array())
     {
-        $this->events['event_name'][] = array(
+        $this->data['events'][$event_name][] = array(
             'tracker' => $tracker_name,
             'values'  => $values,
         );
@@ -62,6 +62,15 @@ class DataLayerCollector extends DataCollector
     public function getEvents()
     {
         return $this->data['events'];
+    }
+
+    public function getUniqueEventsCount()
+    {
+        $count = 0;
+        foreach ($this->data['events'] as $events) {
+            $count+= count($events);
+        }
+        return $count;
     }
 
     /**

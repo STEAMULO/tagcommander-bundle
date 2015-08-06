@@ -112,7 +112,7 @@ class TagcommanderExtension extends \Twig_Extension
 
         $function = $this->events[$tracker]['function'];
 
-        $event = new TrackEvent($tracker, $event_name, array_merge($this->datalayer, $values));
+        $event = new TrackEvent($tracker, $event_name, array_merge($this->datalayer->all(), $values));
         $this->dispatcher->dispatch('tc_event', $event);
 
         return sprintf(

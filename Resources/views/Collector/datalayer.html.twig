@@ -13,7 +13,7 @@
     </div>
     <div class="sf-toolbar-info-piece">
         <b>Unique events</b>
-        <span>{{ collector.events | length }}</span>
+        <span>{{ collector.uniqueEventsCount }}</span>
     </div>
     {% endset %}
 
@@ -61,7 +61,24 @@
         </tbody>
     </table>
 
-    <h2>Containers</h2>
-
+    <h2>Events</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Tracker</th>
+          <th>Nb Values</th>
+        </tr>
+      </thead>
+    {% for event_name, events in collector.events %}
+      {% for event in events %}
+      <tr>
+        <td>{{ event_name }}</td>
+        <td>{{ event.tracker }}</td>
+        <td>{{ event.values | length }}</td>
+      </tr>
+      {% endfor %}
+    {% endfor %}
+    </table>
 
 {% endblock %}
