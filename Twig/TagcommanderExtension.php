@@ -12,9 +12,11 @@
 namespace Meup\Bundle\TagcommanderBundle\Twig;
 
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\TrackEvent;
 
 /**
  *
@@ -25,6 +27,11 @@ class TagcommanderExtension extends \Twig_Extension
      * @var ParameterBagInterface
      */
     protected $datalayer;
+
+    /**
+     * @var EventDispatcher
+     */
+    protected $dispatcher;
 
     /**
      * @var string
@@ -49,9 +56,10 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      *
      */
-    public function __construct(ParameterBagInterface $datalayer, $tc_vars = 'tc_vars')
+    public function __construct(ParameterBagInterface $datalayer, EventDispatcher $dispatcher, $tc_vars = 'tc_vars')
     {
         $this->datalayer     = $datalayer;
+        $this->dispatcher    = $dispatcher;
         $this->tc_vars       = $tc_vars;
         $this->serializer    = new Serializer(
             array(new ObjectNormalizer()),
@@ -103,6 +111,9 @@ class TagcommanderExtension extends \Twig_Extension
         }
 
         $function = $this->events[$tracker]['function'];
+
+        $event = new TrackEvent($tracker, $event_name, array_merge($this->datalayer, $values));
+        $this->dispatcher->dispatch('tc_event', $event);
 
         return sprintf(
             "%s('%s', %s);",

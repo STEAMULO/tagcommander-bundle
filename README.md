@@ -48,7 +48,7 @@ Then update your pages to track events :
   </head>
   <body>
     <!-- simple tracking sample -->
-    <a href="#" onclick="javascript: return {{ tc_event('lorem_click'}) }}">lorem ipsum</a>
+    <a href="#" onclick="javascript: return {{ tc_event('lorem_click') }}">lorem ipsum</a>
     <!-- advanced tracking sample -->
     <img src="sample.jpg" onmouseover="javascript: return {{ tc_event('over_image', {'src': 'sample.jpg'}, 'other_events') }}">
     <!-- rendering tag commander containers -->

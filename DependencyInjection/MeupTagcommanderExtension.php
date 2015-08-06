@@ -28,14 +28,28 @@ class MeupTagcommanderExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        /* loading configuration */
         $config = $this->processConfiguration(
             new Configuration(),
             $configs
         );
 
+        $this
+            ->loadDataLayer    ($config, $container)
+            ->loadTwigExtension($config, $container)
+            ->loadCollector    ($config, $container)
+        ;
+    }
 
-        /* setting up datalayer */
+    /**
+     * Setting up datalayer
+     *
+     * @param Array $config
+     * @param ContainerBuilder $container
+     * 
+     * @return self
+     */
+    protected function loadDataLayer(array $config, ContainerBuilder $container)
+    {
         $datalayer = new Definition(
             'Symfony\Component\DependencyInjection\ParameterBag\ParameterBag',
             array(
@@ -49,11 +63,22 @@ class MeupTagcommanderExtension extends Extension
         );
         $container->setAlias('tc_datalayer', 'meup_tagcommander.datalayer');
 
-        /* */
+        return $this;
+    }
+
+    /**
+     * @param Array $config
+     * @param ContainerBuilder $container
+     * 
+     * @return self
+     */
+    protected function loadTwigExtension(array $config, ContainerBuilder $container)
+    {
         $twig_extension = new Definition(
             'Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension',
             array(
                 new Reference('meup_tagcommander.datalayer'),
+                new Reference('event_dispatcher'),
                 $config['datalayer']['name']
             )
         );
@@ -72,8 +97,19 @@ class MeupTagcommanderExtension extends Extension
             $twig_extension
         );
 
+        return $this;
+    }
 
-        /* setting up the datalayer collector for the toolbar */
+    /**
+     * Setting up the datalayer collector for the toolbar
+     *
+     * @param Array $config
+     * @param ContainerBuilder $container
+     * 
+     * @return self
+     */
+    protected function loadCollector(array $config, ContainerBuilder $container)
+    {
         $datacollector = new Definition(
             'Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector',
             array(
@@ -93,5 +129,19 @@ class MeupTagcommanderExtension extends Extension
             'meup_tagcommander.datacollector',
             $datacollector
         );
+
+        $listener = new Definition(
+            'Meup\Bundle\TagcommanderBundle\EventDispatcher\Listener\CollectorListener',
+            array(
+                new Reference('meup_tagcommander.datacollector'),
+            )
+        );
+        $listener->addTag('kernel.event_listener', array(
+            'event'  => 'tc_event',
+            'method' => 'onTcEvent',
+        ));
+        $container->setDefinition('meup_tagcommander.datacollector_listener', $listener);
+
+        return $this;
     }
 }

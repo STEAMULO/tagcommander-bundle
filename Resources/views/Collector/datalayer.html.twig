@@ -3,7 +3,7 @@
 {% block toolbar %}
     {% set icon %}
     <span class="icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wgEDS4ch3Ae/AAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAADqSURBVEjHY2AYBaOAZMCILnCSI8OJgYGpkZGBwQafxv8MDEf+/v1XbPV7xilkcSZMlUxzCBkGdYkNCxPTHHRxFkyF/4XYZIUZ9G814zXwnEQJw98P3+TQxZnwabqoVstwmjObgYGBgeHLsbsMpzmzGS6q1eK1CKuB/3/9Yfh6/hHD/19/cMv9/YfVQBZsgr9ffmK4ZtXJQKocQS+TA0YNxATchpCkxsTDDmdTZKDWsXIGBgYGBi49GTgbH2DBzKOMrxkZGPhhfFjCxppeGRnuEHbh379x//8zXCAcWv9P/f37P2u0fB0FVAAAdthJX5Xq0yEAAAAASUVORK5CYII=" alt=""></span>
-    <span class="sf-toolbar-status">300 events</span>
+    <span class="sf-toolbar-status">{{ collector.events | length }} events</span>
     {% endset %}
 
     {% set text %}
@@ -13,7 +13,7 @@
     </div>
     <div class="sf-toolbar-info-piece">
         <b>Unique events</b>
-        <span>300</span>
+        <span>{{ collector.events | length }}</span>
     </div>
     {% endset %}
 

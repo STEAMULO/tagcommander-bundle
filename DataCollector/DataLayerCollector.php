@@ -32,6 +32,10 @@ class DataLayerCollector extends DataCollector
     public function __construct(ParameterBagInterface $datalayer)
     {
         $this->datalayer = $datalayer;
+        $this->data = array(
+            'values' => array(),
+            'events' => array(),
+        );
     }
 
     /**
@@ -39,9 +43,14 @@ class DataLayerCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->data = array(
-            'values' => $this->datalayer->all(),
-            'events' => array(),
+        $this->data['values'] = $this->datalayer->all();
+    }
+
+    public function collectEvent($tracker_name, $event_name, $values = array())
+    {
+        $this->events['event_name'][] = array(
+            'tracker' => $tracker_name,
+            'values'  => $values,
         );
     }
 
