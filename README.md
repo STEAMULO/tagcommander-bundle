@@ -1,6 +1,10 @@
 TagCommander Bundle
 ===================
 
+Provides a Symfony tool pack to easily integrates TagCommander into your application.
+
+![Toolbar sample](Resources/doc/toolbar-sample.jpg)
+
 ## Installation
 
 Install the package with Composer :
