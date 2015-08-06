@@ -4,7 +4,7 @@ namespace Meup\Bundle\TagcommanderBundle\EventDispatcher\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
-class TrackEvent extends Event
+class Track extends Event
 {
     protected $tracker;
     protected $event;

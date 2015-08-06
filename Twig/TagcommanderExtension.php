@@ -16,7 +16,8 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\TrackEvent;
+use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
+use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
 
 /**
  *
@@ -112,7 +113,7 @@ class TagcommanderExtension extends \Twig_Extension
 
         $function = $this->events[$tracker]['function'];
 
-        $event = new TrackEvent($tracker, $event_name, array_merge($this->datalayer->all(), $values));
+        $event = new Track($tracker, $event_name, array_merge($this->datalayer->all(), $values));
         $this->dispatcher->dispatch('tc_event', $event);
 
         return sprintf(
@@ -133,18 +134,25 @@ class TagcommanderExtension extends \Twig_Extension
     public function tc_container($container_name)
     {
         $container = $this->containers[$container_name];
+        $container_version = $container_alternative = null;
 
-        $src = $container['script'];
+        $container_script = $container['script'];
+        $src = $container_script;
 
         if ($container['version']) {
-            $src.= sprintf('?%s', $container['version']);
+            $container_version = $container['version'];
+            $src.= sprintf('?%s', $container_version);
         }
 
         $result = sprintf('<script type="text/javascript" src="%s"></script>', $src);
 
         if ($container['alternative']) {
-            $result.= sprintf('<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>', $container['alternative']);
+            $container_alternative = $container['alternative'];
+            $result.= sprintf('<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>', $container_alternative);
         }
+
+        $event = new DeployContainer($container_name, $container_script, $container_version, $container_alternative);
+        $this->dispatcher->dispatch('tc_container', $event);
 
         return $result;
     }

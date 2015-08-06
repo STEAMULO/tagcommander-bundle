@@ -130,6 +130,19 @@ class MeupTagcommanderExtension extends Extension
             $datacollector
         );
 
+        $subscriber = new Definition(
+            'Meup\Bundle\TagcommanderBundle\EventDispatcher\Subscriber\CollectorSubscriber',
+            array(
+                new Reference('meup_tagcommander.datacollector'),
+            )
+        );
+        $subscriber->setPublic(false);
+        $container->setDefinition('meup_tagcommander.datacollector_subscriber', $subscriber);
+
+        $dispatcher = $container->getDefinition('event_dispatcher');
+        $dispatcher->addMethodCall('addSubscriber', array(new Reference('meup_tagcommander.datacollector_subscriber')));
+
+        /*
         $listener = new Definition(
             'Meup\Bundle\TagcommanderBundle\EventDispatcher\Listener\CollectorListener',
             array(
@@ -141,6 +154,7 @@ class MeupTagcommanderExtension extends Extension
             'method' => 'onTcEvent',
         ));
         $container->setDefinition('meup_tagcommander.datacollector_listener', $listener);
+        */
 
         return $this;
     }
