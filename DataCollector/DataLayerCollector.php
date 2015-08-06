@@ -75,6 +75,11 @@ class DataLayerCollector extends DataCollector
         return $this->data['events'];
     }
 
+    public function getContainers()
+    {
+        return $this->data['containers'];
+    }
+
     public function getUniqueEventsCount()
     {
         $count = 0;
