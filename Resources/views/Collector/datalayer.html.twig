@@ -3,11 +3,11 @@
 {% block toolbar %}
     {% set icon %}
     <span class="icon"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAcCAYAAABh2p9gAAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wgEDS4ch3Ae/AAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAADqSURBVEjHY2AYBaOAZMCILnCSI8OJgYGpkZGBwQafxv8MDEf+/v1XbPV7xilkcSZMlUxzCBkGdYkNCxPTHHRxFkyF/4XYZIUZ9G814zXwnEQJw98P3+TQxZnwabqoVstwmjObgYGBgeHLsbsMpzmzGS6q1eK1CKuB/3/9Yfh6/hHD/19/cMv9/YfVQBZsgr9ffmK4ZtXJQKocQS+TA0YNxATchpCkxsTDDmdTZKDWsXIGBgYGBi49GTgbH2DBzKOMrxkZGPhhfFjCxppeGRnuEHbh379x//8zXCAcWv9P/f37P2u0fB0FVAAAdthJX5Xq0yEAAAAASUVORK5CYII=" alt=""></span>
-    {% if collector.containers | length >= 1 %}
-    <span class="sf-toolbar-status">{{ collector.events | length }} events</span>
-    {% elseif %}
-    <span class="sf-toolbar-status sf-toolbar-status-red">No active container !</span>
-    {% endif %}
+      {% if collector.containers | length >= 1 %}
+      <span class="sf-toolbar-status">{{ collector.events | length }} events</span>
+      {% else %}
+      <span class="sf-toolbar-status sf-toolbar-status-red">No active container !</span>
+      {% endif %}
     {% endset %}
 
     {% set text %}

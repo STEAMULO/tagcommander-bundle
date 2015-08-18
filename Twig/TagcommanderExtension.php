@@ -86,7 +86,7 @@ class TagcommanderExtension extends \Twig_Extension
         ;
     }
 
-    public function tc_vars($values = array())
+    public function tcVars($values = array())
     {
         return sprintf(
             '<script type="text/javascript">var %s = %s;</script>',
@@ -106,7 +106,7 @@ class TagcommanderExtension extends \Twig_Extension
         return $this;
     }
 
-    public function tc_event($event_name, $values = array(), $tracker = null) {
+    public function tcEvent($event_name, $values = array(), $tracker = null) {
         if (is_null($tracker)) {
             $tracker = $this->default_event;
         }
@@ -131,7 +131,7 @@ class TagcommanderExtension extends \Twig_Extension
         return $this;
     }
 
-    public function tc_container($container_name)
+    public function tcContainer($container_name)
     {
         $container = $this->containers[$container_name];
         $container_version = $container_alternative = null;
@@ -163,9 +163,9 @@ class TagcommanderExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('tc_vars',      array($this, 'tc_vars')),
-            new \Twig_SimpleFunction('tc_container', array($this, 'tc_container')),
-            new \Twig_SimpleFunction('tc_event',     array($this, 'tc_event')),
+            new \Twig_SimpleFunction('tc_vars',      array($this, 'tcVars')),
+            new \Twig_SimpleFunction('tc_container', array($this, 'tcContainer')),
+            new \Twig_SimpleFunction('tc_event',     array($this, 'tcEvent')),
         );
     }
 
