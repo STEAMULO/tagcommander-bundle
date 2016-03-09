@@ -24,10 +24,12 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $datalayer  = new ParameterBag();
-        $dispatcher = new EventDispatcher();
+        $datalayer     = new ParameterBag(array('foo' => 'bar'));
+        $dispatcher    = new EventDispatcher();
+
         $tc_vars    = 'toto_var';
         $extension  = new TagcommanderExtension($datalayer, $dispatcher, $tc_vars);
+        $this->assertEquals('tagcommander_extension', $extension->getName());
 
 
         $tc_container_config = array(
@@ -45,6 +47,18 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('tagcommander_extension', $extension->getName());
 
 
+
+        $functions = array_reduce($extension->getFunctions(), function($functions, $twig_function) {
+            $functions[] = $twig_function->getName();
+            return $functions;
+        });
+        $this->assertTrue(in_array('tc_vars', $functions));
+        $this->assertTrue(in_array('tc_container', $functions));
+        $this->assertTrue(in_array('tc_event', $functions));
+
+
+
+        /* test tc_vars */
         $doc = new \DOMDocument();
         $doc->loadHTML(
             $extension->tcVars(array('lorem'=>'ipsum'))
@@ -60,5 +74,9 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
         $values = json_decode($values);
 
         $this->assertEquals('ipsum', $values->lorem);
+
+
+        /* test tc_event */
+        $this->assertEquals("tc_event_1('click', {\"foo\":\"bar\"});", $extension->tcEvent('click'));
     }
 }

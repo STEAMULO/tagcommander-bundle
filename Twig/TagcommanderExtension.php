@@ -99,7 +99,7 @@ class TagcommanderExtension extends \Twig_Extension
     {
         $this->events[$event['name']] = $event;
 
-        if ($set_as_default) {
+        if ($set_as_default || (!$set_as_default && !$this->default_event)) {
             $this->default_event = $event['name'];
         }
 
