@@ -163,9 +163,9 @@ class TagcommanderExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction('tc_vars',      array($this, 'tcVars')),
-            new \Twig_SimpleFunction('tc_container', array($this, 'tcContainer')),
-            new \Twig_SimpleFunction('tc_event',     array($this, 'tcEvent')),
+            new \Twig_SimpleFunction('tc_vars',      array($this, 'tcVars'),      array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('tc_container', array($this, 'tcContainer'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFunction('tc_event',     array($this, 'tcEvent'),     array('is_safe' => array('html'))),
         );
     }
 
