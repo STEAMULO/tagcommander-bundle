@@ -37,6 +37,7 @@ class MeupTagcommanderExtension extends Extension
             ->loadDataLayer    ($config, $container)
             ->loadTwigExtension($config, $container)
             ->loadCollector    ($config, $container)
+            ->TemplatingRender ($config, $container)
         ;
     }
 
