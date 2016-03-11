@@ -46,8 +46,7 @@ class MeupTagcommanderExtension extends Extension
      */
     public function TemplatingRender(array $config, ContainerBuilder $container)
     {
-        $container->setParameter('debug.templating.engine.twig.class', 'Meup\Bundle\TagcommanderBundle\Templating\TimedEngine');
-        $container->setParameter('templating.engine.twig.class', 'Meup\Bundle\TagcommanderBundle\Templating\Engine');
+        $container->setParameter('templating.engine.delegating.class', 'Meup\Bundle\TagcommanderBundle\Templating\Engine');
     }
 
     /**
