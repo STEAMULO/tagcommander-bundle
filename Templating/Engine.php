@@ -11,10 +11,10 @@
 
 namespace Meup\Bundle\TagcommanderBundle\Templating;
 
-use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine;
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Render;
 
-class Engine extends TwigEngine
+class Engine extends DelegatingEngine
 {
     /**
      * {@inheritdoc}
