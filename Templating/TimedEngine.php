@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Symfony\Bundle\TwigBundle\Debug;
+namespace Meup\Bundle\TagcommanderBundle\Templating;
 
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Stopwatch\Stopwatch;
