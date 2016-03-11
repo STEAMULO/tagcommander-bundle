@@ -19,12 +19,12 @@ class Engine extends DelegatingEngine
     /**
      * {@inheritdoc}
      */
-    public function render($name, array $parameters = array())
+    public function renderResponse($view, array $parameters = array(), Response $response = null)
     {
-        $event = new Render($name, $parameters, $this->container->get('request'));
+        $event = new Render($name, $parameters);
 
         $container->get('event_dispatcher')->dispatch('render', $event);
         
-        return parent::render($name, $parameters);
+        return parent::renderResponse($view, $parameters, $response);
     }
 }
