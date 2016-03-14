@@ -37,16 +37,7 @@ class MeupTagcommanderExtension extends Extension
             ->loadDataLayer    ($config, $container)
             ->loadTwigExtension($config, $container)
             ->loadCollector    ($config, $container)
-            ->TemplatingRender ($config, $container)
         ;
-    }
-
-    /**
-     *
-     */
-    public function TemplatingRender(array $config, ContainerBuilder $container)
-    {
-        $container->setParameter('templating.engine.delegating.class', 'Meup\Bundle\TagcommanderBundle\Templating\Engine');
     }
 
     /**
