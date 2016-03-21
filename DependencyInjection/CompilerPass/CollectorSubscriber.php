@@ -22,7 +22,7 @@ class CollectorSubscriber implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $dispatcher = $container->getDefinition('event_dispatcher');
+        $dispatcher = $container->findDefinition('event_dispatcher');
         $dispatcher->addMethodCall('addSubscriber', array(new Reference('meup_tagcommander.datacollector_subscriber')));
     }
 }
