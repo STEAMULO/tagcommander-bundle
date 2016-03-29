@@ -1,6 +1,10 @@
 TagCommander Bundle
 ===================
 
+[![Build Status](https://travis-ci.org/1001Pharmacies/tagcommander-bundle.svg?branch=master)](https://travis-ci.org/1001Pharmacies/tagcommander-bundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/1001Pharmacies/tagcommander-bundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/1001Pharmacies/tagcommander-bundle/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/1001Pharmacies/tagcommander-bundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/1001Pharmacies/tagcommander-bundle/?branch=master)
+
 Provides a Symfony tool pack to easily integrates TagCommander into your application.
 
 ![Toolbar sample](Resources/doc/toolbar-sample.jpg)
