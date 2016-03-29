@@ -11,13 +11,13 @@
 
 namespace Meup\Bundle\TagcommanderBundle\Twig;
 
+use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
+use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
-use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  *
@@ -43,7 +43,7 @@ class TagcommanderExtension extends \Twig_Extension
      * @var array
      */
     protected $events = array();
-    
+
     /**
      * @var array
      */
@@ -57,7 +57,7 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      *
      */
-    public function __construct(ParameterBagInterface $datalayer, EventDispatcher $dispatcher, $tc_vars = 'tc_vars')
+    public function __construct(ParameterBagInterface $datalayer, EventDispatcherInterface $dispatcher, $tc_vars = 'tc_vars')
     {
         $this->datalayer     = $datalayer;
         $this->dispatcher    = $dispatcher;
@@ -71,14 +71,15 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      *
      */
-    protected function serializeWithValues($values = array()) {
+    protected function serializeWithValues($values = array())
+    {
         $datalayer = clone $this->datalayer;
 
         return $this
             ->serializer
             ->serialize(
                 array_merge(
-                    $datalayer->all(), 
+                    $datalayer->all(),
                     $values
                 ),
                 'json'
@@ -106,7 +107,8 @@ class TagcommanderExtension extends \Twig_Extension
         return $this;
     }
 
-    public function tcEvent($event_name, $values = array(), $tracker = null) {
+    public function tcEvent($event_name, $values = array(), $tracker = null)
+    {
         if (is_null($tracker)) {
             $tracker = $this->default_event;
         }
