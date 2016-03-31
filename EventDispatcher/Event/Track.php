@@ -29,7 +29,7 @@ class Track extends Event
     protected $event;
 
     /**
-     * @var string
+     * @var array
      */
     protected $values;
 
