@@ -69,13 +69,7 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
             $extension->tcVars(array('lorem'=>'ipsum'))
         );
         $str = trim($doc->getElementsByTagName('script')->item(0)->nodeValue, ' ;');
-
-        list($name, $values) = sscanf($str, 'var %s = %s');
-
-        $serializer = new Serializer(
-            array(new ObjectNormalizer()),
-            array(new JsonEncoder())
-        );
+        list(, $values) = sscanf($str, 'var %s = %s');
         $values = json_decode($values);
 
         $this->assertEquals('ipsum', $values->lorem);

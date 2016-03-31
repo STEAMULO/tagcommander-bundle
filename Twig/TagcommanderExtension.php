@@ -30,7 +30,7 @@ class TagcommanderExtension extends \Twig_Extension
     protected $datalayer;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     protected $dispatcher;
 
@@ -69,7 +69,9 @@ class TagcommanderExtension extends \Twig_Extension
     );
 
     /**
-     *
+     * @param ParameterBagInterface $datalayer
+     * @param EventDispatcherInterface $dispatcher
+     * @param string $tcVars
      */
     public function __construct(
         ParameterBagInterface $datalayer,
