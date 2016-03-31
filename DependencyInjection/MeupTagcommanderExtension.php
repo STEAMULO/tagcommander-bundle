@@ -67,11 +67,10 @@ class MeupTagcommanderExtension extends Extension
 
     /**
      * @param Array $config
-     * @param ContainerBuilder $container
      * 
      * @return Definition
      */
-    private function buildTwigExtension(array $config, ContainerBuilder $container)
+    private function buildTwigExtension(array $config)
     {
         $twig_extension = new Definition(
             'Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension',
@@ -95,7 +94,7 @@ class MeupTagcommanderExtension extends Extension
      */
     protected function loadTwigExtension(array $config, ContainerBuilder $container)
     {
-        $twig_extension = $this->buildTwigExtension($config, $container);
+        $twig_extension = $this->buildTwigExtension($config);
 
         foreach ($config['containers'] as $tc_container) {
             $twig_extension->addMethodCall('addContainer', array($tc_container));
