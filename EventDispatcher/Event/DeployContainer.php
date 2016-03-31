@@ -29,20 +29,20 @@ class DeployContainer extends Event
     protected $script;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $version;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $alternative;
 
     /**
      * @param string $name
      * @param string $script
-     * @param string $version
-     * @param string $alternative
+     * @param string|null $version
+     * @param string|null $alternative
      */
     public function __construct($name, $script, $version = null, $alternative = null)
     {
@@ -69,7 +69,7 @@ class DeployContainer extends Event
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContainerVersion()
     {
@@ -77,7 +77,7 @@ class DeployContainer extends Event
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContainerAlternative()
     {
