@@ -19,10 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     *
-     */
-    public function testConstruct()
+    private function getDispatcher()
     {
         $dispatcher = $this
             ->getMockBuilder('Symfony\Component\DependencyInjection\Definition')
@@ -38,16 +35,29 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
+        return $dispatcher;
+    }
+
+    private function getContainer()
+    {
         $container = $this
             ->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
             ->getMock()
         ;
         $container
             ->method('findDefinition')
-            ->willReturn($dispatcher)
+            ->willReturn($this->getDispatcher())
         ;
 
+        return $container;
+    }
+
+    /**
+     *
+     */
+    public function testCompilerPass()
+    {
         $collectorSubscriber = new CollectorSubscriber();
-        $collectorSubscriber->process($container);
+        $collectorSubscriber->process($this->getContainer());
     }
 }

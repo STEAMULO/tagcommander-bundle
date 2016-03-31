@@ -171,6 +171,34 @@ class TagcommanderExtension extends \Twig_Extension
         return $this;
     }
 
+    private function containerHas($container, $parameterName)
+    {
+        return array_key_exists($parameterName, $container) && !empty($container[$parameterName]);
+    }
+
+    private function buildSrc($containerName)
+    {
+        $container = $this->containers[$containerName];
+        $src       = $container['script'];
+        if ($this->containerHas($container, 'version')) {
+            $src .= sprintf('?%s', $container['version']);
+        }
+        return sprintf('<script type="text/javascript" src="%s"></script>', $src);
+    }
+
+    private function buildAlternative($containerName)
+    {
+        $container = $this->containers[$containerName];
+        $result    = '';
+        if ($this->containerHas($container, 'alternative')) {
+            $result .= sprintf(
+                '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',
+                $container['alternative']
+            );
+        }
+        return $result;
+    }
+
     /**
      * @param string $containerName
      * @return string
@@ -178,35 +206,21 @@ class TagcommanderExtension extends \Twig_Extension
     public function tcContainer($containerName)
     {
         $container = $this->containers[$containerName];
-        $container_version = $container_alternative = null;
 
-        $container_script = $container['script'];
-        $src = $container_script;
+        $this
+            ->dispatcher
+            ->dispatch(
+                'tc_container',
+                new DeployContainer(
+                    $containerName,
+                    $container['script'],
+                    $container['version'],
+                    $container['alternative']
+                )
+            )
+        ;
 
-        if (array_key_exists('version', $container) && !empty($container['version'])) {
-            $container_version = $container['version'];
-            $src .= sprintf('?%s', $container_version);
-        }
-
-        $result = sprintf('<script type="text/javascript" src="%s"></script>', $src);
-
-        if (array_key_exists('alternative', $container) && !empty($container['alternative'])) {
-            $container_alternative = $container['alternative'];
-            $result .= sprintf(
-                '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',
-                $container_alternative
-            );
-        }
-
-        $event = new DeployContainer(
-            $containerName,
-            $container_script,
-            $container_version,
-            $container_alternative
-        );
-        $this->dispatcher->dispatch('tc_container', $event);
-
-        return $result;
+        return $this->buildSrc($containerName).$this->buildAlternative($containerName);
     }
 
     /**
@@ -214,7 +228,7 @@ class TagcommanderExtension extends \Twig_Extension
      * @param string $methodName
      * @return \Twig_SimpleFunction
      */
-    protected function makeFunction($twigName, $methodName)
+    private function makeFunction($twigName, $methodName)
     {
         return new \Twig_SimpleFunction(
             $twigName,
