@@ -8,6 +8,9 @@ TagCommander Bundle
 Provides a Symfony tool pack to easily integrates TagCommander into your application.
 
 ![Toolbar sample](Resources/doc/toolbar-sample.jpg)
+![Profiler sample](Resources/doc/profiler-sample.jpg)
+
+Data from your TagCommander datalayer, containers and events will be visible in your Symfony's debug toolbar and profiler.
 
 ## Installation
 

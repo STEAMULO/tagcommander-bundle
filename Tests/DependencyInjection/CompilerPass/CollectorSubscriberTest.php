@@ -19,6 +19,9 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @return Symfony\Component\DependencyInjection\Definition
+     */
     private function getDispatcher()
     {
         $dispatcher = $this
@@ -38,6 +41,9 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
         return $dispatcher;
     }
 
+    /**
+     * @return Symfony\Component\DependencyInjection\ContainerBuilder
+     */
     private function getContainer()
     {
         $container = $this
