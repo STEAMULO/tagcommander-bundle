@@ -35,6 +35,7 @@ class MeupTagcommanderExtension extends Extension
             ->loadDataLayer($config, $container)
             ->loadTwigExtension($config, $container)
             ->loadCollector($container)
+            ->loadSubscriber($container)
         ;
     }
 
@@ -109,9 +110,7 @@ class MeupTagcommanderExtension extends Extension
     {
         $datacollector = new Definition(
             'Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector',
-            array(
-                new Reference('meup_tagcommander.datalayer')
-            )
+            array(new Reference('meup_tagcommander.datalayer'))
         );
         $datacollector
             ->addTag(
@@ -128,11 +127,14 @@ class MeupTagcommanderExtension extends Extension
             $datacollector
         );
 
+        return $this;
+    }
+
+    private function loadSubscriber(ContainerBuilder $container)
+    {
         $subscriber = new Definition(
             'Meup\Bundle\TagcommanderBundle\EventDispatcher\Subscriber\CollectorSubscriber',
-            array(
-                new Reference('meup_tagcommander.datacollector'),
-            )
+            array(new Reference('meup_tagcommander.datacollector'))
         );
         $subscriber->setPublic(false);
         $container->setDefinition('meup_tagcommander.datacollector_subscriber', $subscriber);

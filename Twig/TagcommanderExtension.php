@@ -176,7 +176,7 @@ class TagcommanderExtension extends \Twig_Extension
         return array_key_exists($parameterName, $container) && !empty($container[$parameterName]);
     }
 
-    private function containerSrc($containerName)
+    private function buildSrc($containerName)
     {
         $container = $this->containers[$containerName];
         $src       = $container['script'];
@@ -186,7 +186,7 @@ class TagcommanderExtension extends \Twig_Extension
         return sprintf('<script type="text/javascript" src="%s"></script>', $src);
     }
 
-    private function containerAlternative($containerName)
+    private function buildAlternative($containerName)
     {
         $container = $this->containers[$containerName];
         $result    = '';
@@ -220,7 +220,7 @@ class TagcommanderExtension extends \Twig_Extension
             )
         ;
 
-        return $this->containerSrc($containerName).$this->containerAlternative($containerName);
+        return $this->buildSrc($containerName).$this->buildAlternative($containerName);
     }
 
     /**
