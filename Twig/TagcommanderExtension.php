@@ -60,6 +60,15 @@ class TagcommanderExtension extends \Twig_Extension
     protected $serializer;
 
     /**
+     * @var array
+     */
+    static protected $twigFunctions = array(
+        'tc_vars'      => 'tcVars',
+        'tc_container' => 'tcContainer',
+        'tc_event'     => 'tcEvent',
+    );
+
+    /**
      *
      */
     public function __construct(
@@ -199,39 +208,31 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
+     * @param string $twigName
+     * @param string $methodName
+     * @return \Twig_SimpleFunction
+     */
+    protected function makeFunction($twigName, $methodName)
+    {
+        return new \Twig_SimpleFunction(
+            $twigName,
+            array($this, $methodName),
+            array(
+                'is_safe' => array('html'),
+            )
+        );
+    }
+
+    /**
      * @return \Twig_SimpleFunction[]
      */
     public function getFunctions()
     {
-        return array(
-
-            /* tc_var() */
-            new \Twig_SimpleFunction(
-                'tc_vars',
-                array($this, 'tcVars'),
-                array(
-                    'is_safe' => array('html'),
-                )
-            ),
-
-            /* tc_container() */
-            new \Twig_SimpleFunction(
-                'tc_container',
-                array($this, 'tcContainer'),
-                array(
-                    'is_safe' => array('html'),
-                )
-            ),
-
-            /* tc_event() */
-            new \Twig_SimpleFunction(
-                'tc_event',
-                array($this, 'tcEvent'),
-                array(
-                    'is_safe' => array('html'),
-                )
-            ),
-        );
+        $result = array();
+        foreach (self::$twigFunctions as $twigName => $methodName) {
+            $result[] = $this->makeFunction($twigName, $methodName);
+        }
+        return $result;
     }
 
     /**
