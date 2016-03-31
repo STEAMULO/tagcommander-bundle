@@ -37,7 +37,7 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      * @var string
      */
-    protected $tc_vars;
+    protected $tcVars;
 
     /**
      * @var array
@@ -52,16 +52,33 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      * @var string
      */
-    protected $default_event = null;
+    protected $defaultEvent = null;
+
+    /**
+     * @var Serializer
+     */
+    protected $serializer;
+
+    /**
+     * @var array
+     */
+    static protected $twigFunctions = array(
+        'tc_vars'      => 'tcVars',
+        'tc_container' => 'tcContainer',
+        'tc_event'     => 'tcEvent',
+    );
 
     /**
      *
      */
-    public function __construct(ParameterBagInterface $datalayer, EventDispatcherInterface $dispatcher, $tc_vars = 'tc_vars')
-    {
+    public function __construct(
+        ParameterBagInterface $datalayer,
+        EventDispatcherInterface $dispatcher,
+        $tcVars = 'tc_vars'
+    ) {
         $this->datalayer     = $datalayer;
         $this->dispatcher    = $dispatcher;
-        $this->tc_vars       = $tc_vars;
+        $this->tcVars        = $tcVars;
         $this->serializer    = new Serializer(
             array(new ObjectNormalizer()),
             array(new JsonEncoder())
@@ -69,7 +86,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
-     *
+     * @return string|boolean|integer|double|null
      */
     protected function serializeWithValues($values = array())
     {
@@ -87,45 +104,64 @@ class TagcommanderExtension extends \Twig_Extension
         ;
     }
 
+    /** 
+     * @param Array $values
+     * @return string
+     */
     public function tcVars($values = array())
     {
         return sprintf(
             '<script type="text/javascript">var %s = %s;</script>',
-            $this->tc_vars,
+            $this->tcVars,
             $this->serializeWithValues($values)
         );
     }
 
-    public function addEvent($event, $set_as_default = false)
+    /** 
+     * @param array $event
+     * @param boolean $setAsDefault
+     * @return self
+     */
+    public function addEvent($event, $setAsDefault = false)
     {
         $this->events[$event['name']] = $event;
 
-        if ($set_as_default || (!$set_as_default && !$this->default_event)) {
-            $this->default_event = $event['name'];
+        if ($setAsDefault || (!$setAsDefault && !$this->defaultEvent)) {
+            $this->defaultEvent = $event['name'];
         }
 
         return $this;
     }
 
-    public function tcEvent($event_name, $values = array(), $tracker = null)
+    /**
+     * @param string $eventName
+     * @param array $values 
+     * @param string|null $tracker
+     * @return string
+     */
+    public function tcEvent($eventName, $values = array(), $tracker = null)
     {
         if (is_null($tracker)) {
-            $tracker = $this->default_event;
+            $tracker = $this->defaultEvent;
         }
 
         $function = $this->events[$tracker]['function'];
 
-        $event = new Track($tracker, $event_name, array_merge($this->datalayer->all(), $values));
+        $event = new Track($tracker, $eventName, array_merge($this->datalayer->all(), $values));
         $this->dispatcher->dispatch('tc_event', $event);
 
         return sprintf(
             "%s('%s', %s);",
             $function,
-            $event_name,
+            $eventName,
             $this->serializeWithValues($values)
         );
     }
 
+    /**
+     * @param array $container
+     * @return self
+     */
     public function addContainer($container)
     {
         $this->containers[$container['name']] = $container;
@@ -133,9 +169,13 @@ class TagcommanderExtension extends \Twig_Extension
         return $this;
     }
 
-    public function tcContainer($container_name)
+    /**
+     * @param string $containerName
+     * @return string
+     */
+    public function tcContainer($containerName)
     {
-        $container = $this->containers[$container_name];
+        $container = $this->containers[$containerName];
         $container_version = $container_alternative = null;
 
         $container_script = $container['script'];
@@ -143,36 +183,60 @@ class TagcommanderExtension extends \Twig_Extension
 
         if ($container['version']) {
             $container_version = $container['version'];
-            $src.= sprintf('?%s', $container_version);
+            $src .= sprintf('?%s', $container_version);
         }
 
         $result = sprintf('<script type="text/javascript" src="%s"></script>', $src);
 
         if ($container['alternative']) {
             $container_alternative = $container['alternative'];
-            $result.= sprintf('<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>', $container_alternative);
+            $result .= sprintf(
+                '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',
+                $container_alternative
+            );
         }
 
-        $event = new DeployContainer($container_name, $container_script, $container_version, $container_alternative);
+        $event = new DeployContainer(
+            $containerName,
+            $container_script,
+            $container_version,
+            $container_alternative
+        );
         $this->dispatcher->dispatch('tc_container', $event);
 
         return $result;
     }
 
     /**
-     *
+     * @param string $twigName
+     * @param string $methodName
+     * @return \Twig_SimpleFunction
      */
-    public function getFunctions()
+    protected function makeFunction($twigName, $methodName)
     {
-        return array(
-            new \Twig_SimpleFunction('tc_vars',      array($this, 'tcVars'),      array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('tc_container', array($this, 'tcContainer'), array('is_safe' => array('html'))),
-            new \Twig_SimpleFunction('tc_event',     array($this, 'tcEvent'),     array('is_safe' => array('html'))),
+        return new \Twig_SimpleFunction(
+            $twigName,
+            array($this, $methodName),
+            array(
+                'is_safe' => array('html'),
+            )
         );
     }
 
     /**
-     *
+     * @return \Twig_SimpleFunction[]
+     */
+    public function getFunctions()
+    {
+        $result = array();
+        foreach (self::$twigFunctions as $twigName => $methodName) {
+            $result[] = $this->makeFunction($twigName, $methodName);
+        }
+        return $result;
+    }
+
+    /**
+     * @return string
      */
     public function getName()
     {

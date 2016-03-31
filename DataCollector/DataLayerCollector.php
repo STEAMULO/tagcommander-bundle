@@ -47,14 +47,27 @@ class DataLayerCollector extends DataCollector
         $this->data['values'] = $this->datalayer->all();
     }
 
-    public function collectEvent($tracker_name, $event_name, $values = array())
+    /**
+     * @param string $trackerName
+     * @param string $eventName
+     * @param array $values
+     */
+    public function collectEvent($trackerName, $eventName, $values = array())
     {
-        $this->data['events'][$event_name][] = array(
-            'tracker' => $tracker_name,
+        $this->data['events'][$eventName][] = array(
+            'tracker' => $trackerName,
             'values'  => $values,
         );
     }
 
+    /**
+     * @param string $name
+     * @param string $script
+     * @param string|null $version
+     * @param string|null $alternative
+     *
+     * @return void
+     */
     public function collectContainer($name, $script, $version = null, $alternative = null)
     {
         $this->data['containers'][] = array(
@@ -65,26 +78,38 @@ class DataLayerCollector extends DataCollector
         );
     }
 
+    /**
+     * @return Array
+     */
     public function getValues()
     {
         return $this->data['values'];
     }
 
+    /**
+     * @return Array
+     */
     public function getEvents()
     {
         return $this->data['events'];
     }
 
+    /**
+     * @return Array
+     */
     public function getContainers()
     {
         return $this->data['containers'];
     }
 
+    /**
+     * @return integer
+     */
     public function getUniqueEventsCount()
     {
         $count = 0;
         foreach ($this->data['events'] as $events) {
-            $count+= count($events);
+            $count += count($events);
         }
         return $count;
     }
