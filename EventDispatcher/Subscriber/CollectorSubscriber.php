@@ -20,7 +20,7 @@ class CollectorSubscriber implements EventSubscriberInterface
     {
         return array(
             'tc_container' => array('onTcContainer', 0),
-            'tc_event'     => array('onTcEvent',     0),
+            'tc_event'     => array('onTcEvent', 0),
         );
     }
 

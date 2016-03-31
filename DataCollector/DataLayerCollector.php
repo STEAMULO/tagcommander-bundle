@@ -109,7 +109,7 @@ class DataLayerCollector extends DataCollector
     {
         $count = 0;
         foreach ($this->data['events'] as $events) {
-            $count+= count($events);
+            $count += count($events);
         }
         return $count;
     }
