@@ -22,20 +22,18 @@ use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
 class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * 
+     * @param DeployContainer $deployContainer
+     * @param Track $track
+     * @return DataLayerCollector
      */
-    public function testConstruct()
+    private function buildCollector(DeployContainer $deployContainer, Track $track)
     {
-        $deployContainer = new DeployContainer('name', 'http://');
-        $track = new Track('tracker', 'event', array('foo' => 'bar'));
-
         $collector = $this
             ->getMockBuilder('Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector')
             ->disableOriginalConstructor()
             ->setMethods(array('collectContainer', 'collectEvent'))
             ->getMock()
         ;
-
         $collector
             ->expects($this->once())
             ->method('collectContainer')
@@ -55,8 +53,18 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
                 $this->equalTo($track->getValues())
             )
         ;
+        return $collector;
+    }
 
-        $collectorSubscriber = new CollectorSubscriber($collector);
+    /**
+     * 
+     */
+    public function testConstruct()
+    {
+        $deployContainer = new DeployContainer('name', 'http://');
+        $track = new Track('tracker', 'event', array('foo' => 'bar'));
+
+        $collectorSubscriber = new CollectorSubscriber($this->buildCollector($deployContainer, $track));
         $collectorSubscriber->onTcContainer($deployContainer);
         $collectorSubscriber->onTcEvent($track);
 
