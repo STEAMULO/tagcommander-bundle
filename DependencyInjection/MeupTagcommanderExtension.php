@@ -17,9 +17,7 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * This is the class that loads and manages your bundle configuration
- *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ * 
  */
 class MeupTagcommanderExtension extends Extension
 {
@@ -34,9 +32,9 @@ class MeupTagcommanderExtension extends Extension
         );
 
         $this
-            ->loadDataLayer    ($config, $container)
+            ->loadDataLayer($config, $container)
             ->loadTwigExtension($config, $container)
-            ->loadCollector    ($config, $container)
+            ->loadCollector($container)
         ;
     }
 
@@ -103,12 +101,11 @@ class MeupTagcommanderExtension extends Extension
     /**
      * Setting up the datalayer collector for the toolbar
      *
-     * @param Array $config
      * @param ContainerBuilder $container
      * 
      * @return self
      */
-    protected function loadCollector(array $config, ContainerBuilder $container)
+    protected function loadCollector(ContainerBuilder $container)
     {
         $datacollector = new Definition(
             'Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector',
@@ -117,7 +114,8 @@ class MeupTagcommanderExtension extends Extension
             )
         );
         $datacollector
-            ->addTag('data_collector',
+            ->addTag(
+                'data_collector',
                 array(
                     'template' => 'MeupTagcommanderBundle:Collector:datalayer.html.twig',
                     'id'       => 'datalayer',

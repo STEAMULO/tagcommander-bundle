@@ -22,21 +22,33 @@ class DeployContainer extends Event
         $this->alternative = $alternative;
     }
 
+    /**
+     * @return string
+     */
     public function getContainerName()
     {
         return $this->name;
     }
 
+    /**
+     * @return string
+     */
     public function getContainerScript()
     {
         return $this->script;
     }
 
+    /**
+     * @return string
+     */
     public function getContainerVersion()
     {
         return $this->version;
     }
 
+    /**
+     * @return string
+     */
     public function getContainerAlternative()
     {
         return $this->alternative;

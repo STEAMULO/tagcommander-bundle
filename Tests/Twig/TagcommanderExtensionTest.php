@@ -48,10 +48,13 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 
 
 
-        $functions = array_reduce($extension->getFunctions(), function($functions, $twig_function) {
-            $functions[] = $twig_function->getName();
-            return $functions;
-        });
+        $functions = array_reduce(
+            $extension->getFunctions(),
+            function ($functions, $twig_function) {
+                $functions[] = $twig_function->getName();
+                return $functions;
+            }
+        );
         $this->assertTrue(in_array('tc_vars', $functions));
         $this->assertTrue(in_array('tc_container', $functions));
         $this->assertTrue(in_array('tc_event', $functions));

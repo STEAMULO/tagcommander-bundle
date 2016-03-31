@@ -57,7 +57,7 @@ class MeupTagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->extension = $this->getExtension();
-        $this->root      = "meup_tagcommander";
+        $this->root      = 'meup_tagcommander';
     }
 
     /**
@@ -107,8 +107,8 @@ class MeupTagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
             )
         ;
 
-        $this->assertTrue($container->hasDefinition($this->root . ".datalayer"));
-        $this->assertTrue($container->hasDefinition($this->root . ".twig_extension"));
-        $this->assertTrue($container->hasDefinition($this->root . ".datacollector_subscriber"));
+        $this->assertTrue($container->hasDefinition($this->root . '.datalayer'));
+        $this->assertTrue($container->hasDefinition($this->root . '.twig_extension'));
+        $this->assertTrue($container->hasDefinition($this->root . '.datacollector_subscriber'));
     }
 }
