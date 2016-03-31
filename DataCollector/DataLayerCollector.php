@@ -48,7 +48,9 @@ class DataLayerCollector extends DataCollector
     }
 
     /**
-     *
+     * @param string $trackerName
+     * @param string $eventName
+     * @param array $values
      */
     public function collectEvent($trackerName, $eventName, $values = array())
     {
@@ -61,8 +63,8 @@ class DataLayerCollector extends DataCollector
     /**
      * @param string $name
      * @param string $script
-     * @param string $version
-     * @param string $alternative
+     * @param string|null $version
+     * @param string|null $alternative
      *
      * @return void
      */

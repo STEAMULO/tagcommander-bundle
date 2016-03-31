@@ -50,7 +50,7 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 
         $functions = array_reduce(
             $extension->getFunctions(),
-            function ($functions, $twig_function) {
+            function($functions, $twig_function) {
                 $functions[] = $twig_function->getName();
                 return $functions;
             }

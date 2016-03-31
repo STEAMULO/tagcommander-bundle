@@ -77,7 +77,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
-     * @return string
+     * @return string|boolean|integer|double|null
      */
     protected function serializeWithValues($values = array())
     {
@@ -109,7 +109,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /** 
-     * @param string $event
+     * @param array $event
      * @param boolean $setAsDefault
      * @return self
      */
@@ -127,7 +127,7 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      * @param string $eventName
      * @param array $values 
-     * @param string $tracker
+     * @param string|null $tracker
      * @return string
      */
     public function tcEvent($eventName, $values = array(), $tracker = null)
@@ -150,7 +150,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
-     * @param string $container
+     * @param array $container
      * @return self
      */
     public function addContainer($container)
@@ -174,14 +174,14 @@ class TagcommanderExtension extends \Twig_Extension
 
         if ($container['version']) {
             $container_version = $container['version'];
-            $src.= sprintf('?%s', $container_version);
+            $src .= sprintf('?%s', $container_version);
         }
 
         $result = sprintf('<script type="text/javascript" src="%s"></script>', $src);
 
         if ($container['alternative']) {
             $container_alternative = $container['alternative'];
-            $result.= sprintf(
+            $result .= sprintf(
                 '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',
                 $container_alternative
             );
@@ -199,7 +199,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
-     * @return Array
+     * @return \Twig_SimpleFunction[]
      */
     public function getFunctions()
     {
