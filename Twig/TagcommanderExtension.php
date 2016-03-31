@@ -30,7 +30,7 @@ class TagcommanderExtension extends \Twig_Extension
     protected $datalayer;
 
     /**
-     * @var EventDispatcher
+     * @var EventDispatcherInterface
      */
     protected $dispatcher;
 
@@ -69,7 +69,9 @@ class TagcommanderExtension extends \Twig_Extension
     );
 
     /**
-     *
+     * @param ParameterBagInterface $datalayer
+     * @param EventDispatcherInterface $dispatcher
+     * @param string $tcVars
      */
     public function __construct(
         ParameterBagInterface $datalayer,
@@ -181,14 +183,14 @@ class TagcommanderExtension extends \Twig_Extension
         $container_script = $container['script'];
         $src = $container_script;
 
-        if ($container['version']) {
+        if (array_key_exists('version', $container) && !empty($container['version'])) {
             $container_version = $container['version'];
             $src .= sprintf('?%s', $container_version);
         }
 
         $result = sprintf('<script type="text/javascript" src="%s"></script>', $src);
 
-        if ($container['alternative']) {
+        if (array_key_exists('alternative', $container) && !empty($container['alternative'])) {
             $container_alternative = $container['alternative'];
             $result .= sprintf(
                 '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',

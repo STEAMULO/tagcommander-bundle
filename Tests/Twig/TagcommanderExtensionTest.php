@@ -24,8 +24,8 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $datalayer     = new ParameterBag(array('foo' => 'bar'));
-        $dispatcher    = new EventDispatcher();
+        $datalayer  = new ParameterBag(array('foo' => 'bar'));
+        $dispatcher = new EventDispatcher();
 
         $tc_vars    = 'toto_var';
         $extension  = new TagcommanderExtension($datalayer, $dispatcher, $tc_vars);
@@ -33,8 +33,10 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 
 
         $tc_container_config = array(
-            'name'   => 'ab-test',
-            'script' => 'my-ab-test-container.js',
+            'name'        => 'ab-test',
+            'script'      => 'my-ab-test-container.js',
+            'version'     => 1,
+            'alternative' => 'none',
         );
         $extension->addContainer($tc_container_config);
 
@@ -67,19 +69,17 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
             $extension->tcVars(array('lorem'=>'ipsum'))
         );
         $str = trim($doc->getElementsByTagName('script')->item(0)->nodeValue, ' ;');
-
-        list($name, $values) = sscanf($str, 'var %s = %s');
-
-        $serializer = new Serializer(
-            array(new ObjectNormalizer()),
-            array(new JsonEncoder())
-        );
+        list(, $values) = sscanf($str, 'var %s = %s');
         $values = json_decode($values);
 
         $this->assertEquals('ipsum', $values->lorem);
 
 
+        $container  = '<script type="text/javascript" src="my-ab-test-container.js?1"></script>';
+        $container .= '<noscript><iframe src="none" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>';
+
         /* test tc_event */
         $this->assertEquals("tc_event_1('click', {\"foo\":\"bar\"});", $extension->tcEvent('click'));
+        $this->assertEquals($container, $extension->tcContainer('ab-test'));
     }
 }

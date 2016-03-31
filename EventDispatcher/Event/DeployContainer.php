@@ -13,15 +13,36 @@ namespace Meup\Bundle\TagcommanderBundle\EventDispatcher\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ *
+ */
 class DeployContainer extends Event
 {
+    /**
+     * @var string
+     */
     protected $name;
+
+    /**
+     * @var string
+     */
     protected $script;
+
+    /**
+     * @var string|null
+     */
     protected $version;
+
+    /**
+     * @var string|null
+     */
     protected $alternative;
 
     /**
-     * 
+     * @param string $name
+     * @param string $script
+     * @param string|null $version
+     * @param string|null $alternative
      */
     public function __construct($name, $script, $version = null, $alternative = null)
     {
@@ -48,7 +69,7 @@ class DeployContainer extends Event
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContainerVersion()
     {
@@ -56,7 +77,7 @@ class DeployContainer extends Event
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContainerAlternative()
     {
