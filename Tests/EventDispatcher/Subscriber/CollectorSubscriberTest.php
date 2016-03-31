@@ -41,11 +41,7 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
         return $collector;
     }
 
-    /**
-     * @param DeployContainer $deployContainer
-     * @return DataLayerCollector
-     */
-    private function withDeployContainerEvent(DataLayerCollector $collector, DeployContainer $deployContainer)
+    private function withDeployContainerEvent($collector, DeployContainer $deployContainer)
     {
         $collector
             ->expects($this->once())
@@ -59,11 +55,7 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
         ;
     }
 
-    /**
-     * @param Track $track
-     * @return DataLayerCollector
-     */
-    private function withTrackEvent(DataLayerCollector $collector, Track $track)
+    private function withTrackEvent($collector, Track $track)
     {
         $collector
             ->expects($this->once())
