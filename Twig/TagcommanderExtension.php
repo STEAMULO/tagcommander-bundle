@@ -106,7 +106,7 @@ class TagcommanderExtension extends \Twig_Extension
         ;
     }
 
-    /** 
+    /**
      * @param Array $values
      * @return string
      */
@@ -119,7 +119,7 @@ class TagcommanderExtension extends \Twig_Extension
         );
     }
 
-    /** 
+    /**
      * @param array $event
      * @param boolean $setAsDefault
      * @return self
@@ -137,7 +137,7 @@ class TagcommanderExtension extends \Twig_Extension
 
     /**
      * @param string $eventName
-     * @param array $values 
+     * @param array $values
      * @param string|null $tracker
      * @return string
      */
@@ -190,8 +190,9 @@ class TagcommanderExtension extends \Twig_Extension
         $result = '';
         if ($this->containerHas($container, 'alternative')) {
             $result .= sprintf(
-                '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>',
-                $container['alternative']
+                '<noscript><iframe src="%s" width="1" height="1" rel="noindex,nofollow" sandbox="%s"></iframe></noscript>',
+                $container['alternative'],
+                'allow-same-origin allow-scripts'
             );
         }
         return $result;

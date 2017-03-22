@@ -76,7 +76,10 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 
 
         $container  = '<script type="text/javascript" src="my-ab-test-container.js?1"></script>';
-        $container .= '<noscript><iframe src="none" width="1" height="1" rel="noindex,nofollow"></iframe></noscript>';
+        $container .= sprintf(
+            '<noscript><iframe src="none" width="1" height="1" rel="noindex,nofollow" sandbox="%s"></iframe></noscript>',
+            'allow-same-origin allow-scripts'
+        );
 
         /* test tc_event */
         $this->assertEquals("tc_event_1('click', {\"foo\":\"bar\"});", $extension->tcEvent('click'));
