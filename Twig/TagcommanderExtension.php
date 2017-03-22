@@ -113,7 +113,7 @@ class TagcommanderExtension extends \Twig_Extension
     public function tcVars($values = array())
     {
         return sprintf(
-            '<script type="text/javascript">var %s = %s;</script>',
+            '<script type="text/javascript" async>var %s = %s;</script>',
             $this->tcVars,
             $this->serializeWithValues($values)
         );
@@ -182,7 +182,7 @@ class TagcommanderExtension extends \Twig_Extension
         if ($this->containerHas($container, 'version')) {
             $src .= sprintf('?%s', $container['version']);
         }
-        return sprintf('<script type="text/javascript" src="%s"></script>', $src);
+        return sprintf('<script type="text/javascript" src="%s" async></script>', $src);
     }
 
     private function buildAlternative($container)

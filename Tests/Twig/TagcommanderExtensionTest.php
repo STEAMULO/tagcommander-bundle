@@ -75,7 +75,7 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('ipsum', $values->lorem);
 
 
-        $container  = '<script type="text/javascript" src="my-ab-test-container.js?1"></script>';
+        $container  = '<script type="text/javascript" src="my-ab-test-container.js?1" async></script>';
         $container .= sprintf(
             '<noscript><iframe src="none" width="1" height="1" rel="noindex,nofollow" sandbox="%s"></iframe></noscript>',
             'allow-same-origin allow-scripts'
