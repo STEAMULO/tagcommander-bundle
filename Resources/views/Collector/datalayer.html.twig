@@ -34,6 +34,21 @@
 {% endblock %}
 
 {% block panel %}
+    {# Recursive macro for show all subvalues  #}
+    {% macro show_subvalues(values) %}
+        {% for key, value in values %}
+            <tr>
+                <th>{{ key }}</th>
+                <td>
+                    {% if value is iterable %}
+                        <table>
+                        {{ _self.show_subvalues(value) }}
+                        </table>
+                    {% else %}{{ value }}{% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% endmacro %}
 
     <h2>DataLayer</h2>
     <table>
@@ -44,24 +59,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for key, value in collector.values %}
-            <tr>
-                <th>{{ key }}</th>
-
-                <td>
-                {% if value is iterable %}
-                <table>
-                {% for subkey, subvalue in value %}
-                  <tr>
-                    <td>{{ subkey }}</td>
-                    <td>{{ subvalue }}</td>
-                  </tr>
-                {% endfor %}
-                </table>
-                {% else %}{{ value }}{% endif %}
-                </td>
-            </tr>
-            {% endfor %}
+            {{ _self.show_subvalues(collector.values) }}
         </tbody>
     </table>
 
