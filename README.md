@@ -17,7 +17,7 @@ Data from your TagCommander datalayer, containers and events will be visible in 
 Install the package with Composer :
 
 ```
-composer require 1001pharmacies/tagcommander-bundle
+composer require steamulo/tagcommander-bundle
 ```
 
 Update `app/AppKernel.php` :
