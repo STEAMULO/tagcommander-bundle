@@ -1,5 +1,5 @@
 {
-    "name":         "1001pharmacies/tagcommander-bundle",
+    "name":         "steamulo/tagcommander-bundle",
     "type":         "symfony-bundle",
     "description":  "",
     "license":      "MIT",
@@ -12,10 +12,11 @@
     ],
     "require": {
         "php":                ">=5.3.3",
-        "symfony/serializer": "^2.7"
+        "symfony/serializer": "^3.4",
+        "twig/twig": ">=2.11"
     },
     "require-dev": {
-        "symfony/symfony":           "2.3.*",
+        "symfony/symfony":           "3.4.*",
         "phpunit/phpunit":           "4.*",
         "squizlabs/php_codesniffer": "1.*",
         "sebastian/phpcpd":          "2.*",
