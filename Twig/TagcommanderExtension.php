@@ -18,11 +18,13 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  *
  */
-class TagcommanderExtension extends \Twig_Extension
+class TagcommanderExtension extends AbstractExtension
 {
     /**
      * @var ParameterBagInterface
@@ -225,11 +227,11 @@ class TagcommanderExtension extends \Twig_Extension
     /**
      * @param string $twigName
      * @param string $methodName
-     * @return \Twig_SimpleFunction
+     * @return TwigFunction
      */
     private function makeFunction($twigName, $methodName)
     {
-        return new \Twig_SimpleFunction(
+        return new TwigFunction(
             $twigName,
             array($this, $methodName),
             array(
@@ -239,7 +241,7 @@ class TagcommanderExtension extends \Twig_Extension
     }
 
     /**
-     * @return \Twig_SimpleFunction[]
+     * @return TwigFunction[]
      */
     public function getFunctions()
     {

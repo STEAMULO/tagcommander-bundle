@@ -42,6 +42,18 @@ class DataLayerCollector extends DataCollector
     /**
      * {@inheritDoc}
      */
+    public function reset()
+    {
+        $this->data      = array(
+            'values'     => array(),
+            'events'     => array(),
+            'containers' => array(),
+        );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data['values'] = $this->datalayer->all();
