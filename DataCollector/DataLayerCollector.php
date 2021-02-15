@@ -91,7 +91,7 @@ class DataLayerCollector extends DataCollector
     }
 
     /**
-     * @return Array
+     * @return array
      */
     public function getValues()
     {
@@ -99,7 +99,7 @@ class DataLayerCollector extends DataCollector
     }
 
     /**
-     * @return Array
+     * @return array
      */
     public function getEvents()
     {
@@ -107,7 +107,7 @@ class DataLayerCollector extends DataCollector
     }
 
     /**
-     * @return Array
+     * @return array
      */
     public function getContainers()
     {

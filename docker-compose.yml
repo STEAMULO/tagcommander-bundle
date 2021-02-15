@@ -1,0 +1,13 @@
+version: '3'
+services:
+  php-fpm:
+    image: php-tagcommander
+    restart: unless-stopped
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile-php
+    user: "${DUID:-0}:${DGID:-0}"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      PHP_IDE_CONFIG: serverName=tagcommander-docker

@@ -12,6 +12,8 @@
 namespace Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass;
 
 use Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass\CollectorSubscriber;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -20,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @return Symfony\Component\DependencyInjection\Definition
+     * @return Definition
      */
     private function getDispatcher()
     {
@@ -42,7 +44,7 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return Symfony\Component\DependencyInjection\ContainerBuilder
+     * @return ContainerBuilder
      */
     private function getContainer()
     {

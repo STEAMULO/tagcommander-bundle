@@ -1,0 +1,11 @@
+FROM php:7.3-fpm
+ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+
+RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions xdebug gd curl imap json opcache xml mbstring
+
+RUN curl -sS https://getcomposer.org/installer | php -- --version=2.0.9 --install-dir=/usr/local/bin --filename=composer
+
+RUN apt update -y
+RUN apt install -y git
+

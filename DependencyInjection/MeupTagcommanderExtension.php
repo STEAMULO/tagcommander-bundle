@@ -42,9 +42,9 @@ class MeupTagcommanderExtension extends Extension
     /**
      * Setting up datalayer
      *
-     * @param Array $config
+     * @param array $config
      * @param ContainerBuilder $container
-     * 
+     *
      * @return self
      */
     protected function loadDataLayer(array $config, ContainerBuilder $container)
@@ -66,8 +66,8 @@ class MeupTagcommanderExtension extends Extension
     }
 
     /**
-     * @param Array $config
-     * 
+     * @param array $config
+     *
      * @return Definition
      */
     private function buildTwigExtension(array $config)
@@ -87,9 +87,9 @@ class MeupTagcommanderExtension extends Extension
     }
 
     /**
-     * @param Array $config
+     * @param array $config
      * @param ContainerBuilder $container
-     * 
+     *
      * @return self
      */
     protected function loadTwigExtension(array $config, ContainerBuilder $container)

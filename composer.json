@@ -11,12 +11,14 @@
         }
     ],
     "require": {
-        "php":                ">=5.3.3",
-        "symfony/serializer": "^3.4",
-        "twig/twig": ">=2.11"
+        "php":                          ">=5.3.3",
+        "symfony/serializer":           "^4.0",
+        "twig/twig":                    ">=2.11",
+        "symfony/http-kernel":          "^4.0",
+        "symfony/dependency-injection": "^4.0",
+        "symfony/config":               "^4.0"
     },
     "require-dev": {
-        "symfony/symfony":           "3.4.*",
         "phpunit/phpunit":           "4.*",
         "squizlabs/php_codesniffer": "1.*",
         "sebastian/phpcpd":          "2.*",
