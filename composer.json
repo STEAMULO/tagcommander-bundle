@@ -25,8 +25,8 @@
         "phing/phing":               "~2.9"
     },
     "autoload": {
-        "psr-0": {
-            "Meup\\Bundle\\TagcommanderBundle": ""
+        "psr-4": {
+            "Meup\\Bundle\\TagcommanderBundle\\": ""
         }
     },
     "target-dir": "Meup/Bundle/TagcommanderBundle",
