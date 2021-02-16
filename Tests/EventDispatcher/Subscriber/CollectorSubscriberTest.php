@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagcommanderBundle\EventDispatcher\Subscriber;
+namespace Meup\Bundle\TagcommanderBundle\Tests\EventDispatcher\Subscriber;
 
 use Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector;
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Subscriber\CollectorSubscriber;

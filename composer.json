@@ -27,7 +27,10 @@
     "autoload": {
         "psr-4": {
             "Meup\\Bundle\\TagcommanderBundle\\": ""
-        }
+        },
+        "exclude-from-classmap": [
+            "/Tests/"
+        ]
     },
     "config": {
         "bin-dir": "bin"

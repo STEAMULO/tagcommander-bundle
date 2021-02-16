@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass;
+namespace Meup\Bundle\TagcommanderBundle\Tests\DependencyInjection\CompilerPass;
 
 use Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass\CollectorSubscriber;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

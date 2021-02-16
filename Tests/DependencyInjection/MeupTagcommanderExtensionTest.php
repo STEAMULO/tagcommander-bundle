@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagcommanderBundle\DependencyInjection;
+namespace Meup\Bundle\TagcommanderBundle\Tests\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Meup\Bundle\TagcommanderBundle\DependencyInjection\MeupTagcommanderExtension;

@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagcommanderBundle\DataCollector;
+namespace Meup\Bundle\TagcommanderBundle\Tests\DataCollector;
 
 use Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;

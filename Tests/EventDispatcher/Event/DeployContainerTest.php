@@ -9,7 +9,7 @@
 * file that was distributed with this source code.
 */
 
-namespace Meup\Bundle\TagcommanderBundle\EventDispatcher\Event;
+namespace Meup\Bundle\TagcommanderBundle\Tests\EventDispatcher\Event;
 
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
 
