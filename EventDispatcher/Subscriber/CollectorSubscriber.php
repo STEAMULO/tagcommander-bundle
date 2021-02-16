@@ -34,14 +34,12 @@ class CollectorSubscriber implements EventSubscriberInterface
         $this->collector = $collector;
     }
 
-    /**
-     * @return array<string,array<string|integer>>
-     */
+    /** @inheritDoc */
     public static function getSubscribedEvents()
     {
         return array(
-            'tc_container' => array('onTcContainer', 0),
-            'tc_event'     => array('onTcEvent', 0),
+            DeployContainer::class => 'onTcContainer',
+            Track::class     => 'onTcEvent',
         );
     }
 

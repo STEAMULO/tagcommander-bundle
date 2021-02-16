@@ -152,7 +152,7 @@ class TagcommanderExtension extends AbstractExtension
         $function = $this->events[$tracker]['function'];
 
         $event = new Track($tracker, $eventName, array_merge($this->datalayer->all(), $values));
-        $this->dispatcher->dispatch('tc_event', $event);
+        $this->dispatcher->dispatch($event);
 
         return sprintf(
             "%s('%s', %s);",
@@ -211,7 +211,6 @@ class TagcommanderExtension extends AbstractExtension
         $this
             ->dispatcher
             ->dispatch(
-                'tc_container',
                 new DeployContainer(
                     $containerName,
                     $container['script'],

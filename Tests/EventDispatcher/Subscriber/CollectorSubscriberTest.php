@@ -81,7 +81,7 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
         $collectorSubscriber->onTcEvent($track);
 
         $this->assertEquals(
-            array('tc_container', 'tc_event'),
+            array(DeployContainer::class, Track::class),
             array_keys($collectorSubscriber->getSubscribedEvents())
         );
     }
