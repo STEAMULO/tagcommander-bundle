@@ -29,7 +29,6 @@
             "Meup\\Bundle\\TagcommanderBundle\\": ""
         }
     },
-    "target-dir": "Meup/Bundle/TagcommanderBundle",
     "config": {
         "bin-dir": "bin"
     }
