@@ -11,16 +11,16 @@
 
 namespace Meup\Bundle\TagcommanderBundle\Tests\Twig;
 
+use DOMDocument;
+use Meup\Bundle\TagcommanderBundle\Twig\TagcommanderExtension;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\EventDispatcher\EventDispatcher;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 /**
  *
  */
-class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
+class TagcommanderExtensionTest extends TestCase
 {
     public function testConstruct()
     {
@@ -64,7 +64,7 @@ class TagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
 
 
         /* test tc_vars */
-        $doc = new \DOMDocument();
+        $doc = new DOMDocument();
         $doc->loadHTML(
             $extension->tcVars(array('lorem'=>'ipsum'))
         );

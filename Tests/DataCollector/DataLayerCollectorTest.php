@@ -12,6 +12,7 @@
 namespace Meup\Bundle\TagcommanderBundle\Tests\DataCollector;
 
 use Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  *
  */
-class DataLayerCollectorTest extends \PHPUnit_Framework_TestCase
+class DataLayerCollectorTest extends TestCase
 {
     /**
      * 

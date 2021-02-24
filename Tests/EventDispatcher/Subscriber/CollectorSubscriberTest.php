@@ -15,11 +15,12 @@ use Meup\Bundle\TagcommanderBundle\DataCollector\DataLayerCollector;
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Subscriber\CollectorSubscriber;
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
+use PHPUnit\Framework\TestCase;
 
 /**
  *
  */
-class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
+class CollectorSubscriberTest extends TestCase
 {
     /**
      * @param DeployContainer $deployContainer

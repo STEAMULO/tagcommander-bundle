@@ -12,6 +12,7 @@
 namespace Meup\Bundle\TagcommanderBundle\Tests\DependencyInjection\CompilerPass;
 
 use Meup\Bundle\TagcommanderBundle\DependencyInjection\CompilerPass\CollectorSubscriber;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
@@ -19,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  *
  */
-class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
+class CollectorSubscriberTest extends TestCase
 {
     /**
      * @return Definition
@@ -46,10 +47,11 @@ class CollectorSubscriberTest extends \PHPUnit_Framework_TestCase
     /**
      * @return ContainerBuilder
      */
-    private function getContainer()
+    private function getContainer(): ContainerBuilder
     {
         $container = $this
-            ->getMockBuilder('Symfony\Component\DependencyInjection\ContainerBuilder')
+            ->getMockBuilder(ContainerBuilder::class)
+            ->disableOriginalConstructor()
             ->getMock()
         ;
         $container

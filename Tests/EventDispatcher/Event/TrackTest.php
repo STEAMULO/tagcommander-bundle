@@ -12,11 +12,12 @@
 namespace Meup\Bundle\TagcommanderBundle\Tests\EventDispatcher\Event;
 
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\Track;
+use PHPUnit\Framework\TestCase;
 
 /**
  *
  */
-class TrackTest extends \PHPUnit_Framework_TestCase
+class TrackTest extends TestCase
 {
     public function testConstruct()
     {

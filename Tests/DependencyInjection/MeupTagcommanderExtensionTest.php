@@ -11,13 +11,14 @@
 
 namespace Meup\Bundle\TagcommanderBundle\Tests\DependencyInjection;
 
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Meup\Bundle\TagcommanderBundle\DependencyInjection\MeupTagcommanderExtension;
 
 /**
  *
  */
-class MeupTagcommanderExtensionTest extends \PHPUnit_Framework_TestCase
+class MeupTagcommanderExtensionTest extends TestCase
 {
     /**
      * @var MeupTagcommanderExtension

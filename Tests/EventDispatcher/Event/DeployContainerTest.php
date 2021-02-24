@@ -12,11 +12,12 @@
 namespace Meup\Bundle\TagcommanderBundle\Tests\EventDispatcher\Event;
 
 use Meup\Bundle\TagcommanderBundle\EventDispatcher\Event\DeployContainer;
+use PHPUnit\Framework\TestCase;
 
 /**
  *
  */
-class DeployContainerTest extends \PHPUnit_Framework_TestCase
+class DeployContainerTest extends TestCase
 {
     public function testConstruct()
     {
