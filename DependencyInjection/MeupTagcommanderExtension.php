@@ -128,7 +128,7 @@ class MeupTagcommanderExtension extends Extension
             ->addTag(
                 'data_collector',
                 array(
-                    'template' => 'MeupTagcommanderBundle:Collector:datalayer.html.twig',
+                    'template' => '@MeupTagcommander/Collector/datalayer',
                     'id'       => 'datalayer',
                 )
             )
